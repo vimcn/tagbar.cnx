@@ -82,142 +82,120 @@ window.
 Pseudo-tags are denoted with an asterisk ('*') at the end of their name.
 
 ------------------------------------------------------------------------------
-SUPPORTED FEATURES					*tagbar-features*
+支持的特性             					*tagbar-features*
 
-The following features are supported by Tagbar:
+Tagbar支持下列特性:
 
-  - Display tags under their correct scope.
-  - Automatically update the tags when switching between buffers and editing
-    files.
-  - Display visibility information of tags if available.
-  - Highlight the tag near the cursor while editing files.
-  - Jump to a tag from the Tagbar window.
-  - Display the complete prototype of a tag.
-  - Tags can be sorted either by name or order of appearance in the file.
-  - Scopes can be folded to hide uninteresting information.
-  - Supports all of the languages that ctags does, i.e. Ant, Assembler, ASP,
-    Awk, Basic, BETA, C, C++, C#, COBOL, DosBatch, Eiffel, Erlang, Flex,
-    Fortran, HTML, Java, JavaScript, Lisp, Lua, Make, MatLab, OCaml, Pascal,
-    Perl, PHP, Python, REXX, Ruby, Scheme, Shell script, SLang, SML, SQL, Tcl,
-    Tex, Vera, Verilog, VHDL, Vim and YACC.
-  - Can be extended to support arbitrary new types.
+  - tags显示在定义他们的准确的范围(scope)下面
+  - 在切换buffer和编辑文件时, 自动更新tags.
+  - 如果可见性信息可用, 显示它们.
+  - 当编辑文件时,高亮光标附近的tag.
+  - 在Tagbar窗口里跳转到tag.
+  - 显示完整的tag原型信息.(complete prototype)
+  - Tags可以按名称排序或者按它们在文件中出现的顺序排序.
+  - 范围(Scopes)可以折叠, 以隐藏不感兴趣的信息.
+  - 支持所有ctags支持的语言. 比如Ant, Assembler, ASP, Awk,Basic,BETA,C,C++,
+    C#,COBOL,DosBatch,Eiffel,Erlang,Flex,Fortran, HTML, Java, JavaScript,Lisp,
+    Lua, Make, MatLab, OCaml, Pascal, Perl, PHP, Python, REXX, Ruby, Scheme, 
+    Shell script, SLang, SML, SQL, Tcl, Tex, Vera, Verilog, VHDL, Vim,YACC等.
+  - 可以扩展以支持任意的新类型(new types).
 
 ------------------------------------------------------------------------------
-OTHER CTAGS-COMPATIBLE PROGRAMS				*tagbar-other*
+其他ctags兼容程序          				*tagbar-other*
 
-Tagbar theoretically also supports filetype-specific programs that can output
-tag information that is compatible with ctags. However due to potential
-incompatibilities this may not always completely work. Tagbar has been tested
-with doctorjs/jsctags and will use that if present, other programs require
-some configuration (see |tagbar-extend|). If a program does not work even with
-correct configuration please contact me.
+Tagbar理论上也支持可以输出面向特定文件的tag信息的和ctags兼容的程序. 但是由于
+可能的不兼容性, 这也不总是能正常工作. Tagbar已经和doctorjs/jsctags一起测试过,
+如果有这些程序,将会使用它们. 其他程序需要一些配置(查看 |tagbar-extend|). 如果一
+个程序即使在正确的配置之后仍不能正常工作,请联系我. 
 
-Note: jsctags has to be newer than 2011-01-06 since it needs the "-f" option
-to work. Also, the output of jsctags seems to be a bit unreliable at the
-moment (especially regarding line numbers), so if you notice some strange
-behaviour with it please run it manually in a terminal to check whether the
-bug is in jsctags or Tagbar.
+注意: jsctags需要2011-01-06以后的版本, 因为需要"-f"选项才能正常工作. 同时,
+jsctags的输出在当前有一点点不太可靠(特别是关于行号的), 所以如果你注意到一些奇
+怪的表现, 请手工在终端运行jsctags以检查这到底是jsctags还是Tagbar的bug.
 
 ==============================================================================
-2. Requirements						*tagbar-requirements*
+2. 需求   						*tagbar-requirements*
 
-The following requirements have to be met in order to be able to use tagbar:
+以下条件需要满足以使用tagbar :
 
-  - Vim 7.0 or higher. Older versions will not work since Tagbar uses data
-    structures that were only introduced in Vim 7.
-  - Exuberant ctags 5.5 or higher. Ctags is the program that generates the
-    tag information that Tagbar uses. It is shipped with most Linux
-    distributions, otherwise it can be downloaded from the following
-    website:
+  - Vim7.0或以上. 更旧的版本不能正常工作, 因为Tagbar使用了vim7才引入的数据
+    结构.
 
+  - Exuberant ctags 5.5 或以上. Ctags是一个生成Tagbar使用的tag信息的程序, 一
+    般它在大多数的linux发行版中默认安装, 如果没有, 它可以从以下网址下载 :
         http://ctags.sourceforge.net/
+    Tagbar在大多数ctags可以运行的平台都可以工作 -- 包括unix的变体, Mac OS X和
+    Windows.注意:GNU ctags不能工作.
+    
+    Tagbar自已生成tag信息, 不会需要(或使用)已经存在的tag文件.
 
-    Tagbar will work on any platform that ctags runs on -- this includes
-    UNIX derivatives, Mac OS X and Windows. Note that other versions like
-    GNU ctags will not work.
-    Tagbar generates the tag information by itself and doesn't need (or use)
-    already existing tag files.
-  - File type detection must be turned on in vim. This can be done with the
-    following command in your vimrc:
+  - vim里文件类型检测必须打开. 这可以通过加入以下的命令到vimrc文件完成:
 >
         filetype on
 <
-    See |filetype| for more information.
-  - Tagbar will not work in |restricted-mode| or with 'compatible' set.
+    查看 |filetype| 更多信息.
+
+  - 在 |restricted-mode|或在'compatible'被设置时, Tagbar不能工作.
 
 ==============================================================================
-3. Installation						*tagbar-installation*
+3. 安装  						*tagbar-installation*
 
-Use the normal Vimball install method for installing tagbar.vba:
+使用一般的Vimball方式来安装 tagbar.vba:
 >
 	vim tagbar.vba
 	:so %
 	:q
 <
-Alternatively you can clone the git repository and then add the path to
-'runtimepath' or use the pathogen plugin. Don't forget to run |:helptags| if
-you're not using pathogen.
+或者你也可以clone git repository,并把路径加到'runtimepath'中,或者使用pathogen
+插件. 如果不是用pathogen, 则不要忘了运行 |:helptags|.
 
-If the ctags executable is not installed in one of the directories in your
-$PATH environment variable you have to set the g:tagbar_ctags_bin variable,
-see |g:tagbar_ctags_bin|.
+如果ctags可执行文件不是安装在$PATH环境变量指向的目录中,你需要设置
+g:tagbar_ctags_bin变量. 查看 |g:tagbar_ctags_bin|.
 
 ==============================================================================
-4. Usage						*tagbar-usage*
+4. 使用 						*tagbar-usage*
 
-There are essentially two ways to use Tagbar:
+有两种方式来使用Tagbar:
+  
+  1. 一直运行在屏幕的侧边. 在这种情况下, Tagbar会在源文件改情时,自动更新内容,
+     并高亮文件中的光标位置的tag. 如果在Tagbar选择了一个tag, 文件window会跳转
+     到tag, Tagbar window会保持打开. 此模式|g:tagbar_autoclose|需要未被设置.
+  2. 只在想要跳转到特定的tag时打开Tagbar, 并在选中一个tag后自动关闭. 这在小屏
+     幕时比较有用,因为持久的打开Tagbar window会占据太多的屏幕空间. 在这种模式
+     时,你需要设置|g:tagbar_autoclose|选项. 在Tagbar windows打开时, 光标会自动
+     跳转到Tagbar window.
 
-  1. Have it running all the time in a window on the side of the screen. In
-     this case Tagbar will update its contents whenever the source file is
-     changed and highlight the tag the cursor is currently on in the file. If
-     a tag is selected in Tagbar the file window will jump to the tag and the
-     Tagbar window will stay open. |g:tagbar_autoclose| has to be unset for
-     this mode.
-  2. Only open Tagbar when you want to jump to a specific tag and have it
-     close automatically once you have selected one. This can be useful for
-     example for small screens where a permanent window would take up too much
-     space. You have to set the option |g:tagbar_autoclose| in this case. The
-     cursor will also automatically jump to the Tagbar window when opening it.
-
-Opening and closing the Tagbar window~
+打开和关闭Tagbar window~
 Use |:TagbarOpen| or |:TagbarToggle| to open the Tagbar window if it is
 closed. By default the window is opened on the right side, set the option
 |g:tagbar_left| to open it on the left instead. If the window is already open,
 |:TagbarOpen| will jump to it and |:TagbarToggle| will close it again.
 |:TagbarClose| will simply close the window if it is open.
 
-It is probably a good idea to assign a key to these commands. For example, put
-this in your |vimrc|:
+给这些命令绑定一个快捷键可能是个好主意. 比如, 把下行放到 |vimrc|中:
 >
 	nnoremap <silent> <F9> :TagbarToggle<CR>
 <
-You can then open and close Tagbar by simply pressing the <F9> key.
+然后你就可以通过按<F9>来打开和关闭Tagbar了.
 
-You can also use |:TagbarOpenAutoClose| to open the Tagbar window, jump to it
-and have it close automatically on tag selection regardless of the
-|g:tagbar_autoclose| setting.
+你也可以使用 |:TagbarOpenAutoClose|来打开Tagbar window, 这时不论你的 
+|g:tagbar_autoclose|怎么设置, Tagbar window会在你选则一个tag后自动关闭.
 
-Jumping to tags~
-When you're inside the Tagbar window you can jump to the definition of a tag
-by moving the cursor to a tag and pressing <Enter> or double-clicking on it
-with the mouse. The source file will then move to the definition and put the
-cursor in the corresponding line. This won't work for pseudo-tags.
+跳转到tags~
+当你在Tagbar window中时,你可以通过移动光标到tag然后按<Enter>或者鼠标双击来跳
+转到定义. 源文件会移动到定义处,并将光标放置在相应的行. 这对于pseudo-tags没用
+作用.
 
-Sorting~
-You can sort the tags in the Tagbar window in two ways: by name or by file
-order. Sorting them by name simply displays the tags in their alphabetical
-order under their corresponding scope. Sorting by file order means that the
-tags keep the order they have in the source file, but are still associated
-with the correct scope. You can change the sort order by pressing the "s" key
-in the Tagbar window. The current sort order is displayed in the statusbar of
-the Tagbar window.
+排序~
+你可以按两种方式对Tagbar window中的tags排序: 通过名称排序,或文件顺序. 通过名称
+排时, tags按它们的字母表排序顺序显示在它们相应的范围(scope)下.按文件顺序表示
+tags按它们在源文件中的顺序排序,但仍旧关联到他们正确的范围. 你可以通过按"s"来
+改变排序方法. 当前的排序方法显示在Tagbar window的状态条中.
 
-Folding~
-The displayed scopes (and unscoped types) can be folded to hide uninteresting
-information. Mappings similar to Vim's built-in ones are provided. Folds can
-also be opened and closed by clicking on the fold icon with the mouse.
+折叠~
+显示的范围(或无范围的类型)可以通过折叠来隐藏不感兴趣的信息. 折叠的Mappings和
+Vim的内置折叠Mappings类似. 折叠也可以通过单击折叠图标来打开和关闭.
 
-Displaying the prototype of a tag~
+显示tag原型信息~
 Tagbar can display the prototype of a tag. More precisely it can display the
 line in which the tag is defined. This can be done by either pressing <Space>
 when on a tag or hovering over a tag with the mouse. In the former case the
@@ -226,25 +204,24 @@ case it will be displayed in a pop-up window. The prototype will also be
 displayed when the cursor stays on a tag for 'updatetime' milliseconds.
 
 ------------------------------------------------------------------------------
-COMMANDS						*tagbar-commands*
+命令						*tagbar-commands*
 
 :TagbarOpen
-    Open the Tagbar if it is closed. In case it is already open jump to it.
+    如果Tagbar关闭,就打开Tagbar. 如果已经打开, 则跳转到Tagbar.
 
 :TagbarClose
-    Close the Tagbar window if it is open.
+    如果Tagbar window打开, 就关闭它.
 
 :TagbarToggle
-    Open the Tagbar window if it is closed or close it if it is open.
+    如果Tagbar window关闭则打开它, 反之则关闭它.
 
 :TagbarOpenAutoClose
-    Open the Tagbar window and close it on tag selection, regardless of the
-    setting of |g:tagbar_autoclose|. If it was already open jump to it.
+    打开Tagbar window, 并在选则tag后,自动关闭. 不管 |g:tagbar_autoclose|怎么
+    设置都会自动关闭. 如果Tagbar已经打开, 则跳转到Tagbar.
 
 :TagbarSetFoldlevel [number]
-    Set the foldlevel of the tags of the current file to [number]. The
-    foldlevel of tags in other files remains unaffected. Works in the same way
-    as 'foldlevel'.
+    设置当前文件的折叠层级为 [number]. 其他文件的折叠层级保持不变. 这个
+    和'foldlevel'是相同的工作方式.
 
 :TagbarShowTag
     Open the parent folds of the current tag in the file window as much as
@@ -253,110 +230,101 @@ COMMANDS						*tagbar-commands*
 ------------------------------------------------------------------------------
 KEY MAPPINGS						*tagbar-keys*
 
-These mappings are valid in the Tagbar window:
+以下映射在Tagbar window中是可用的:
 
-<F1>          Display key mapping help.
-<CR>/<Enter>  Jump to the tag under the cursor. Doesn't work for pseudo-tags
-              or generic headers.
-p             Jump to the tag under the cursor, but stay in the Tagbar window.
-<LeftMouse>   When on a fold icon, open or close the fold depending on the
-              current state.
+<F1>          显示键映射帮助.
+<CR>/<Enter>  跳转到当前光标下的tag. 如果是pseudo-tags或一般的头信息则没作用.
+p             源文件跳转到当前光标下的tag.但光标停留在Tagbar window.
+<LeftMouse>   如果点击折叠图标,按折叠的当前状态开打开或关闭折叠.
 <2-LeftMouse> Same as <CR>. See |g:tagbar_singleclick| if you want to use a
               single- instead of a double-click.
-<Space>       Display the prototype of the current tag (i.e. the line defining
-              it) in the command line.
-+/zo          Open the fold under the cursor.
--/zc          Close the fold under the cursor or the current one if there is
-              no fold under the cursor.
-o/za          Toggle the fold under the cursor or the current one if there is
-              no fold under the cursor.
-*/zR          Open all folds by setting foldlevel to 99.
-=/zM          Close all folds by setting foldlevel to 0.
-<C-N>         Go to the next top-level tag.
-<C-P>         Go to the previous top-level tag.
-s             Toggle sort order between name and file order.
-x             Toggle zooming the window.
-q             Close the Tagbar window.
+<Space>       在command行显示当前tag的原型信息.(比如行号)
++/zo          打开当前光标下的折叠.
+-/zc          如果光标下有折叠则半闭光标下的折叠, 如果没有则关闭当前的折叠.
+o/za          切换光标下的折叠状态,如果光标下没有折叠, 切换当前的折叠状态.
+*/zR          通过设置foldlevel为99来打开所有的折叠.
+=/zM          通过设置foldlevel为0来关闭所有的折叠.
+<C-N>         转到下一个顶层tag.
+<C-P>         转到前一个顶层tag.
+s             在tag名称排序和文件顺序排序中切换.
+x             切换tagbar窗的最大化.
+q             关闭Tagbar窗口.
 
 ==============================================================================
-5. Configuration					*tagbar-configuration*
+5. 配置         					*tagbar-configuration*
 
 							*g:tagbar_ctags_bin*
 g:tagbar_ctags_bin~
-Default: empty
+默认: empty
 
-Use this option to specify the location of your ctags executable. Only needed
-if it is not in one of the directories in your $PATH environment variable.
+用此选项来指定ctags可执行文件的位置. 只在ctags可执行文件不在$PATH环境变量指定
+的路径列表之中时,才需要设置此选项.
 
-Example:
+举例: 
 >
 	let g:tagbar_ctags_bin = 'C:\Ctags5.8\ctags.exe'
 <
 
 							*g:tagbar_left*
 g:tagbar_left~
-Default: 0
+默认: 0
 
-By default the Tagbar window will be opened on the right-hand side of vim. Set
-this option to open it on the left instead.
+缺省情况下, Tagbar窗口会在vim的右手侧被打开. 设置此选项从左侧打开Tagbar窗口.
 
-Example:
+举例: 
 >
 	let g:tagbar_left = 1
 <
 
 							*g:tagbar_width*
 g:tagbar_width~
-Default: 40
+默认: 40
 
-Width of the Tagbar window in characters.
+Tagbar窗口的宽度, 单位为字符.
 
-Example:
+举例:
 >
 	let g:tagbar_width = 30
 <
 
 							*g:tagbar_autoclose*
 g:tagbar_autoclose~
-Default: 0
+默认: 0
 
-If you set this option the Tagbar window will automatically close when you
-jump to a tag.
+如果设置了此选项, Tagbar窗口会在你跳转到一个tag后自动关闭.
 
-Example:
+举例:
 >
 	let g:tagbar_autoclose = 1
 <
 
 							*g:tagbar_autofocus*
 g:tagbar_autofocus~
-Default: 0
+默认: 0
 
-If you set this option the cursor will move to the Tagbar window when it is
-opened.
+如果设置了此选项, 在Tagbar窗口打开时,光标会自动移动到Tagbar窗口.
 
-Example:
+举例: 
 >
 	let g:tagbar_autofocus = 1
 <
 
 							*g:tagbar_sort*
 g:tagbar_sort~
-Default: 1
+默认: 1
 
-If this option is set the tags are sorted according to their name. If it is
-unset they are sorted according to their order in the source file. Note that
-in the second case Pseudo-tags are always sorted before normal tags of the
-same kind since they don't have a real position in the file.
+如果设置了此选项,tags按名称排序. 如果未设置, tags按他们在文件中出现的顺序排序.
+注意在后一种情况下,Pseudo-tags总是在一般tags之前排序, 因为他们在文件中没有实
+际的位置.
 
-Example:
+举例:
 >
 	let g:tagbar_sort = 0
 <
 
 							*g:tagbar_compact*
 g:tagbar_compact~
-Default: 0
+默认: 0
 
 Setting this option will result in Tagbar omitting the short help at the
 top of the window and the blank lines in between top-level scopes in order to
@@ -369,36 +337,33 @@ Example:
 
 							*g:tagbar_expand*
 g:tagbar_expand~
-Default: 0
+默认: 0
 
-If this option is set the Vim window will be expanded by the width of the
-Tagbar window if using a GUI version of Vim.
+如果设置了此选项, gui版本的Vim窗口会扩展, 扩展大小为Tagbar窗口的宽度.
 
-Example:
+举例:
 >
 	let g:tagbar_expand = 1
 <
 
 							*g:tagbar_singleclick*
 g:tagbar_singleclick~
-Default: 0
+默认: 0
 
-If this option is set then a single- instead of a double-click is used to jump
-to the tag definition.
+如果设置了此选项, 则在跳转tag定义时,用单击取代双击.
 
-Example:
+举例:
 >
 	let g:tagbar_singleclick = 1
 <
 
 							*g:tagbar_foldlevel*
 g:tagbar_foldlevel~
-Default: 99
+默认: 99
 
-The initial foldlevel for folds in the Tagbar window. Fold with a level higher
-than this number will be closed.
+Tagbar窗口的初始折叠层级值, 层级值大于此值的折叠会被关闭.
 
-Example:
+举例:
 >
 	let g:tagbar_foldlevel = 2
 <
